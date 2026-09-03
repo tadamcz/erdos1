@@ -62,12 +62,11 @@ by OpenAI on 3 September 2026: $10 per million input tokens, $50 per million out
 $12.50 per million cache-write tokens. The harness itself metered spend at stand-in GPT-5.6 Sol prices, which is what the `usd` figure
 in each file name reflects. **Working time** is the harness's `working_time` (time the agent was actually working, excluding waits on
 API retries and rate limits), read from the harness's eval logs; the `h` figure in each file name is instead wall-clock time.
-The Inspect transcripts are linked for the record (access may be restricted).
 
-| Module | Role | Attempt | Cost | Working time | Tokens, millions (input / output / cache read / cache write) | Inspect log |
-|---|---|---|---|---|---|---|
-| `Erdos1/Resolutions/Erdos1_219usd_38h.lean` | **primary** (wired to `Solution.lean`) | default configuration, 28 Aug 2026 (benchmark run) | $405 | 27.1 h | 0.05 / 3.3 / 74 / 13.4 | [transcript](https://viewer.hawk.hawkbench.com/permalink/sample/nazKiHC3d3BqkobCeJMJqN) |
-| `Erdos1/Resolutions/Erdos1_735usd_86h.lean` | alternate | ReAct agent, larger budget, 26 Aug 2026 (re-run) | $1,384 | 84.0 h | 0.41 / 8.6 / 410 / 43.4 | [transcript](https://viewer.hawk.hawkbench.com/permalink/sample/dUHKNhUXgLuAKTA9ekYyWf) |
+| Module | Role | Attempt | Cost | Working time | Tokens, millions (input / output / cache read / cache write) |
+|---|---|---|---|---|---|
+| `Erdos1/Resolutions/Erdos1_219usd_38h.lean` | **primary** (wired to `Solution.lean`) | default configuration, 28 Aug 2026 (benchmark run) | $405 | 27.1 h | 0.05 / 3.3 / 74 / 13.4 |
+| `Erdos1/Resolutions/Erdos1_735usd_86h.lean` | alternate | ReAct agent, larger budget, 26 Aug 2026 (re-run) | $1,384 | 84.0 h | 0.41 / 8.6 / 410 / 43.4 |
 
 ## Proof account
 
