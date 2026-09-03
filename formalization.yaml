@@ -1,0 +1,167 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4 (mathlib-initiative format, Palomar registry rules).
+version: v0.4
+project:
+  name: 'Erdős problem #1: disproof'
+  description: 'Disproof of Erdős problem #1 in Lean 4 with Mathlib. The conjecture is false: for every `ε > 0`
+    there are arbitrarily large `n` and sum-distinct sets `A ⊆ {1, …, N}` with `|A| = n` and `N ≤ ε · 2^n`. Formally,
+    the theorem proved is the negation of the Formal Conjectures statement `Erdos1.erdos_1`. As noted in the FrontierMath
+    Erdős paper, the argument as formalized is ineffective: it gives no bound on how large `n` must be in terms
+    of `ε`. The proof was produced autonomously by a pre-release version of GPT-6 Astra (OpenAI) in the FrontierMath
+    Erdős benchmark of Epoch AI and Thomas F. Bloom, in which AI systems must prove or disprove formal statements
+    of open Erdős problems inside a sandboxed Lean environment; the statement was taken from Formal Conjectures
+    and was open as of August 2026. The repository contains 2 verified resolutions of the statement (one is wired
+    to Comparator); the human contribution is limited to problem selection, statement review, running the harness
+    and packaging.'
+  authors:
+  - Tom Adamczewski
+  license: Apache-2.0
+  responsible_maintainers:
+  - Tom Adamczewski
+classification:
+  arxiv:
+  - math.NT
+  - math.CO
+  msc2020:
+  - 11B13
+  - 11B75
+sources:
+- title: 'Disproof of Erdős problem #1: A sum-distinct set A ⊆ {1,…,N} of size n does not force N ≫ 2^n.'
+  type: original-proof
+  relationship: other
+  note: This formalization is the first presentation of the result. The Lean proof was found by a pre-release version
+    of GPT-6 Astra, working autonomously in the FrontierMath Erdős benchmark harness; no human wrote or steered
+    the proof. Novelty of the ideas relative to the literature has not been established; the resolution itself is
+    new (the problem was listed as open on erdosproblems.com as of August 2026).
+- title: 'Erdős problem #1 (erdosproblems.com)'
+  type: web discussion
+  contributors:
+  - name: Paul Erdős
+    role: problem proposer
+  - name: Thomas F. Bloom
+    role: curator of erdosproblems.com
+  id: https://www.erdosproblems.com/1
+  location: https://www.erdosproblems.com/1
+  relationship: background
+  note: Problem page with statement, history, references and (since the resolution) an informal exposition by Thomas
+    F. Bloom.
+- title: Some of my new and almost new problems and results in combinatorial number theory
+  authors:
+  - Paul Erdős
+  type: paper
+  id: MR1628841
+  location: Number theory (Eger, 1996), de Gruyter, Berlin, 1998, pp. 169–180
+  relationship: background
+  note: Erdős's account of the problem ("perhaps my first serious problem", dated to 1931).
+- title: Problems and results in additive number theory
+  authors:
+  - Paul Erdős
+  type: paper
+  id: MR0079027
+  location: Colloque sur la Théorie des Nombres, Bruxelles, 1955 (1956), pp. 127–137
+  relationship: background
+  note: Source of the Erdős–Moser lower bound N ≫ 2^n/√n.
+- title: A construction for sets of integers with distinct subset sums
+  authors:
+  - Tom Bohman
+  type: paper
+  id: https://doi.org/10.37236/1341
+  location: Electron. J. Combin. 5 (1998), Research Paper 3
+  relationship: background
+  note: Previous best construction, N ≤ 0.22002 · 2^n.
+- title: FrontierMath Erdős
+  authors:
+  - Tom Adamczewski
+  - Thomas F. Bloom
+  type: paper
+  location: https://github.com/epoch-research/LeanOpenProblems
+  relationship: background
+  note: Manuscript (Epoch AI and University of Manchester, 2026) describing the benchmark of 68 open Erdős problems,
+    the agent harness, the verification protocol and the results; this resolution is reported in its Results section
+    and summarised in its appendix. The benchmark and Lean statements are at the given repository.
+related_formalizations:
+- id: https://github.com/google-deepmind/formal-conjectures/blob/488aade228ec37880b8fec178c173c07d279bb53/FormalConjectures/ErdosProblems/1.lean
+  relationship: builds-on
+  note: Formal Conjectures states the conjecture (and its definitions) with `sorry` as an open problem; the definitions
+    and statement here are copied verbatim from this file at this commit, and the compared theorem is its negation,
+    proved.
+- id: https://github.com/epoch-research/LeanOpenProblems/blob/77882c437ca1dfefab3b27fa00f1d29788100311/apn/data/erdos/Isolated/Erdos1.erdos_1.lean
+  relationship: builds-on
+  note: The isolated statement file given to the AI system in the FrontierMath Erdős benchmark (derived from the
+    Formal Conjectures file above).
+status:
+  scope: 'Fully formalized: the compared theorem `Erdos1.erdos_1.disproof` in `Challenge.lean` is proved in `Solution.lean`
+    via the imported module `Erdos1.Resolutions.Erdos1_219usd_38h` with no `sorry` and no axioms beyond propext,
+    Quot.sound and Classical.choice. The 1 further module(s) in `Erdos1/Resolutions/` are independent complete proofs
+    of the same statement, built as the separate Lake library `Erdos1Alternates` but not compared by Comparator.
+    Only the negation of the formal conjecture is advertised; the stronger facts visible in the proofs (for example
+    explicit budgets or 3-colourability) are not part of the compared statement. Nothing about the informal problem
+    was omitted or weakened relative to the benchmark''s formal statement; see fidelity.divergences for the relation
+    between that formal statement and the informal problem.'
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: autonomous
+    models:
+    - GPT-6 Astra (pre-release version, OpenAI)
+    framework: Inspect AI (UK AISI) with the LeanOpenProblems task harness; deepagent-based agent for default-configuration
+      attempts, basic ReAct agent for the larger-budget attempts
+    tool_setup: The model worked alone in a Docker container without network access, with bash, a text editor, a
+      resource-budget tool, a Lean 4 toolchain (v4.27.0) with Mathlib (via Formal Conjectures at commit 488aade228ec),
+      SageMath, Python (sympy, mpmath, numpy, pantograph) and, in the default configuration, subagents, persistent
+      memory, a todo list and an offline snapshot of about 476,000 pure-mathematics arXiv LaTeX sources (proof-pile,
+      up to 2022). Its submission was checked in a separate pristine container by Comparator (Lean FRO) against
+      the trusted statement, permitting only the three standard axioms.
+    cost:
+      wall_time: 38 hours of agent working time for the primary resolution (default configuration ($300, 72 h),
+        28 Aug 2026 (benchmark run)); 124 hours across all 2 resolutions included here
+      spend_usd: 219 USD metered for the primary resolution at GPT-5.6 Sol per-token prices (the pre-release model's
+        prices were unpublished at the time); the FrontierMath Erdős paper recomputes costs at GPT-6 Astra's actual
+        prices, about 1.8–2.0 times higher
+      hardware: API-only inference; the agent's sandbox ran on Epoch AI's cloud evaluation infrastructure (Hawk)
+    prompting_notes: 'Fixed task prompt from the harness (apn/prompts.py in LeanOpenProblems): settle the conjecture
+      in Spec.lean by filling the `sorry` of either the statement or its `.disproof` negation without altering either
+      statement or the imports, using only the permitted axioms; a description of the available tools; and general
+      encouragement that open conjectures are not infeasible. No problem-specific hints or human interaction. Transcripts
+      are linked in the README.'
+  spend_usd: 954 USD metered across the 2 resolution attempt(s) included in this repository (see method notes for
+    the price basis); the paper reports over 220,000 USD of compute across all attempts on all 68 benchmark problems
+  notes: 'The Lean development was written entirely by the AI system inside the benchmark harness. Humans (Thomas
+    F. Bloom) selected the problem and reviewed the formal statement for faithfulness before the run; humans (Tom
+    Adamczewski) ran the harness and, after the run, packaged the verified output into this repository. The only
+    edits to the AI-written files are mechanical and are listed in the README: removed the sorry''d stub of the
+    original conjecture `erdos_1` (lines 22–31 of the original) together with its docstring; restated `Erdos1.erdos_1.disproof`
+    explicitly (the original used `¬ (type_of% @Erdos1.erdos_1)`, which referenced the removed stub) and added a
+    docstring.'
+fidelity:
+  divergences: 'None known between the compared theorem and the conjecture as stated on erdosproblems.com. The formal
+    conjecture `Erdos1.erdos_1` (Formal Conjectures) reads: there is `C > 0` such that `C · 2^|A| < N` for every
+    `N ≠ 0` and every sum-distinct `A ⊆ {1, …, N}`; the compared theorem is exactly its negation. The hypothesis
+    `N ≠ 0` only excludes the degenerate empty interval. The disproof is ineffective (no explicit `n(ε)`).'
+review:
+  status: 'mechanically verified (Comparator: Lean kernel replay, standard axioms only) in the benchmark harness
+    and again in this repository''s CI; preliminary informal reading of the argument by Thomas F. Bloom; no independent
+    refereeing'
+  reviewers:
+  - Thomas F. Bloom
+  notes: 'Statement audit: the formal statement was selected and reviewed for faithfulness to the informal problem
+    by Thomas F. Bloom before the benchmark run (for Formal Conjectures statements he chose the representative statement;
+    autoformalized statements he checked individually). Mathematical review: the resolution was verified by Comparator
+    against the trusted statement; Thomas F. Bloom made an initial, informal examination of the argument and wrote
+    a short exposition (FrontierMath Erdős appendix and erdosproblems.com). The paper states that the proofs have
+    not yet been properly digested by human experts.'
+alignment:
+  namespace: Erdos1
+  statements:
+  - source: erdosproblems.com/1, as formalized in Formal Conjectures (`Erdos1.erdos_1`)
+    lean: Erdos1.erdos_1.disproof
+    module: Challenge
+    status: proved
+    note: The compared theorem is the negation of the formal conjecture; proving it disproves the conjecture. Its
+      exact text is identical to the benchmark statement (Comparator enforces this against the imported proof module).
+acknowledgements: Lean 4, Mathlib and the Lean FRO's Comparator; Google DeepMind's Formal Conjectures project for
+  the formal statements of the Erdős problems it covers; Thomas F. Bloom (erdosproblems.com) for problem selection,
+  statement review and the informal expositions; Epoch AI for running the benchmark; OpenAI for pre-release access
+  to GPT-6 Astra; the Palomar registry template for the repository layout.
