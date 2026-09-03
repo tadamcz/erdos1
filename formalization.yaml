@@ -3,16 +3,9 @@
 version: v0.4
 project:
   name: 'Erdős problem #1: disproof'
-  description: 'Disproof of Erdős problem #1 in Lean 4 with Mathlib. The conjecture is false: for every `ε > 0`
-    there are arbitrarily large `n` and sum-distinct sets `A ⊆ {1, …, N}` with `|A| = n` and `N ≤ ε · 2^n`. Formally,
-    the theorem proved is the negation of the Formal Conjectures statement `Erdos1.erdos_1`. As noted in the FrontierMath
-    Erdős paper, the argument as formalized is ineffective: it gives no bound on how large `n` must be in terms
-    of `ε`. The proof was produced autonomously by a pre-release version of GPT-6 Astra (OpenAI) in the FrontierMath
-    Erdős benchmark of Tom Adamczewski and Thomas F. Bloom (2026), in which AI systems must prove or disprove formal
-    statements of open Erdős problems inside a sandboxed Lean environment; the statement was taken from Formal Conjectures
-    and was open as of August 2026. The repository contains 2 verified resolutions of the statement (one is wired
-    to Comparator); the human contribution is limited to problem selection, statement review, running the harness
-    and packaging.'
+  description: 'Disproof of Erdős problem #1: there is no constant C > 0 such that N > C · 2^n for every sum-distinct
+    set A ⊆ {1, …, N} of size n. Found autonomously by GPT-6 Astra in the FrontierMath Erdős benchmark (Adamczewski
+    and Bloom, 2026).'
   authors:
   - name: Tom Adamczewski
     github: tadamcz
