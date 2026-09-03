@@ -1,0 +1,41 @@
+--- astra-resolutions/Erdos1_219usd_38h.lean
++++ Erdos1/Resolutions/Erdos1_219usd_38h.lean
+@@ -1,4 +1,4 @@
+-import FormalConjecturesUtil
++import Mathlib
+ 
+ /-!
+ # Erdős Problem 1
+@@ -18,17 +18,6 @@
+ -/
+ abbrev IsSumDistinctSet (A : Finset ℕ) (N : ℕ) : Prop :=
+     A ⊆ Finset.Icc 1 N ∧ (fun (⟨S, _⟩ : A.powerset) => S.sum id).Injective
+-
+-/--
+-If $A\subseteq\{1, ..., N\}$ with $|A| = n$ is such that the subset sums $\sum_{a\in S}a$ are
+-distinct for all $S\subseteq A$ then
+-$$
+-  N \gg 2 ^ n.
+-$$
+--/
+-theorem erdos_1 : ∃ C > (0 : ℝ), ∀ (N : ℕ) (A : Finset ℕ) (_ : IsSumDistinctSet A N),
+-    N ≠ 0 → C * 2 ^ A.card < N := by
+-  sorry
+ 
+ /--
+ A finite set of real numbers is said to be sum-distinct if all the subset sums differ by
+@@ -2422,7 +2411,13 @@
+ 
+ end ErdosCounter
+ 
+-theorem Erdos1.erdos_1.disproof : ¬ (type_of% @Erdos1.erdos_1) := by
++/--
++**Disproof of Erdős problem #1.** No constant `C > 0` satisfies `C * 2 ^ |A| < N` for every
++sum-distinct set `A ⊆ {1, …, N}`: there are sum-distinct sets `A ⊆ {1, …, N}` with `N ≤ ε 2^|A|`
++for every `ε > 0`. This is the negation of the statement `erdos_1` of the benchmark file.
++-/
++theorem Erdos1.erdos_1.disproof : ¬ (∃ C > (0 : ℝ), ∀ (N : ℕ) (A : Finset ℕ)
++    (_ : Erdos1.IsSumDistinctSet A N), N ≠ 0 → C * 2 ^ A.card < N) := by
+   intro h
+   apply ErdosCounter.no_uniform_subset_bound
+   rcases h with ⟨C, hC, h⟩

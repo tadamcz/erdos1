@@ -1,0 +1,27 @@
+name = "Erdos1"
+version = "0.1.0"
+defaultTargets = ["Erdos1", "Erdos1Alternates", "Challenge", "Solution"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.28.0"
+
+# The primary resolution: `Erdos1.lean` imports it, and `Solution.lean` imports it in turn.
+[[lean_lib]]
+name = "Erdos1"
+
+# Further independent resolutions of the same statement. Each is a self-contained copy of the
+# benchmark statement followed by its own proof, so they are built separately and never imported
+# together (they would clash on the shared declaration names).
+[[lean_lib]]
+name = "Erdos1Alternates"
+roots = ["Erdos1.Resolutions.Erdos1_735usd_86h"]
+
+[[lean_lib]]
+name = "Challenge"
+roots = ["Challenge"]
+
+[[lean_lib]]
+name = "Solution"
+roots = ["Solution"]
